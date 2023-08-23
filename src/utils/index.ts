@@ -17,7 +17,7 @@
 
 import { App } from '../app/index';
 import {
-  ServiceAccountCredential, ComputeEngineCredential
+  ServiceAccountCredential, ComputeEngineCredential, ApplicationDefaultCredential
 } from '../app/credential-internal';
 import * as validator from './validator';
 
@@ -113,7 +113,8 @@ export function findProjectId(app: App): Promise<string | null> {
   }
 
   const credential = app.options.credential;
-  if (credential instanceof ComputeEngineCredential) {
+  if (credential instanceof ComputeEngineCredential
+    || credential instanceof ApplicationDefaultCredential) {
     return credential.getProjectId();
   }
 
